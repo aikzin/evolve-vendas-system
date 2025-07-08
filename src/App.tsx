@@ -7,6 +7,10 @@ import { Layout } from "./components/layout/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { Clientes } from "./pages/Clientes";
 import { Vendas } from "./pages/Vendas";
+import { Estoque } from "./pages/Estoque";
+import { Relatorios } from "./pages/Relatorios";
+import { ExportarDados } from "./pages/ExportarDados";
+import { Configuracoes } from "./pages/Configuracoes";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -22,10 +26,10 @@ const App = () => (
             <Route path="/" element={<Dashboard />} />
             <Route path="/clientes" element={<Clientes />} />
             <Route path="/vendas" element={<Vendas />} />
-            <Route path="/estoque" element={<Dashboard />} />
-            <Route path="/relatorios" element={<Dashboard />} />
-            <Route path="/exportar" element={<Dashboard />} />
-            <Route path="/configuracoes" element={<Dashboard />} />
+            <Route path="/estoque" element={<Estoque />} />
+            <Route path="/relatorios" element={<Relatorios />} />
+            <Route path="/exportar" element={<ExportarDados />} />
+            <Route path="/configuracoes" element={<Configuracoes />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
