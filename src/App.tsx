@@ -11,6 +11,7 @@ import { Estoque } from "./pages/Estoque";
 import { Relatorios } from "./pages/Relatorios";
 import { ExportarDados } from "./pages/ExportarDados";
 import { Configuracoes } from "./pages/Configuracoes";
+import { ConectarWhatsApp } from "./pages/ConectarWhatsApp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
             <Route path="/relatorios" element={<Relatorios />} />
             <Route path="/exportar" element={<ExportarDados />} />
             <Route path="/configuracoes" element={<Configuracoes />} />
+            <Route path="/whatsapp" element={<ConectarWhatsApp />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>

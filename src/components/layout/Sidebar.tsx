@@ -9,7 +9,8 @@ import {
   Menu,
   X,
   TrendingUp,
-  FileDown
+  FileDown,
+  Smartphone
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -20,6 +21,7 @@ const menuItems = [
   { icon: ShoppingCart, label: 'Vendas', path: '/vendas' },
   { icon: Package, label: 'Estoque', path: '/estoque' },
   { icon: TrendingUp, label: 'Relatórios', path: '/relatorios' },
+  { icon: Smartphone, label: 'WhatsApp', path: '/whatsapp' },
   { icon: FileDown, label: 'Exportar', path: '/exportar' },
   { icon: Settings, label: 'Configurações', path: '/configuracoes' },
 ];
