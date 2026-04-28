@@ -31,6 +31,7 @@ const App = () => (
             <Route path="/relatorios" element={<Relatorios />} />
             <Route path="/exportar" element={<ExportarDados />} />
             <Route path="/configuracoes" element={<Configuracoes />} />
+            <Route path="/whatsapp" element={<ConectarWhatsApp />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Layout>
