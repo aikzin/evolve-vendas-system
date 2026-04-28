@@ -21,6 +21,7 @@ const menuItems = [
   { icon: ShoppingCart, label: 'Vendas', path: '/vendas' },
   { icon: Package, label: 'Estoque', path: '/estoque' },
   { icon: TrendingUp, label: 'Relatórios', path: '/relatorios' },
+  { icon: Smartphone, label: 'WhatsApp', path: '/whatsapp' },
   { icon: FileDown, label: 'Exportar', path: '/exportar' },
   { icon: Settings, label: 'Configurações', path: '/configuracoes' },
 ];
