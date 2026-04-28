@@ -11,6 +11,7 @@ import { Estoque } from "./pages/Estoque";
 import { Relatorios } from "./pages/Relatorios";
 import { ExportarDados } from "./pages/ExportarDados";
 import { Configuracoes } from "./pages/Configuracoes";
+import { ConectarWhatsApp } from "./pages/ConectarWhatsApp";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
