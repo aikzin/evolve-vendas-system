@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useConfiguracoes } from '@/hooks/useConfiguracoes';
 import { useToast } from '@/hooks/use-toast';
 
 interface ConfiguracoesSistema {
@@ -53,7 +53,7 @@ const configuracoesIniciais: ConfiguracoesSistema = {
 };
 
 export const Configuracoes = () => {
-  const [config, setConfig] = useLocalStorage<ConfiguracoesSistema>('crm_configuracoes', configuracoesIniciais);
+  const [config, setConfig] = useConfiguracoes<ConfiguracoesSistema>(configuracoesIniciais);
   const [hasChanges, setHasChanges] = useState(false);
   const { toast } = useToast();
 

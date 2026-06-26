@@ -16,16 +16,12 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Badge } from '@/components/ui/badge';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useEvolutionConfig, EvolutionConfig } from '@/hooks/useEvolutionConfig';
 import { useToast } from '@/hooks/use-toast';
 
 type ConnectionStatus = 'disconnected' | 'connecting' | 'qr' | 'connected' | 'error';
 
-interface WhatsAppConfig {
-  apiUrl: string;
-  apiKey: string;
-  instanceName: string;
-}
+type WhatsAppConfig = EvolutionConfig;
 
 const defaultConfig: WhatsAppConfig = {
   apiUrl: '',
@@ -34,7 +30,7 @@ const defaultConfig: WhatsAppConfig = {
 };
 
 export const ConectarWhatsApp = () => {
-  const [config, setConfig] = useLocalStorage<WhatsAppConfig>('whatsapp_config', defaultConfig);
+  const [config, setConfig] = useEvolutionConfig();
   const [formConfig, setFormConfig] = useState<WhatsAppConfig>(config);
   const [status, setStatus] = useState<ConnectionStatus>('disconnected');
   const [qrCode, setQrCode] = useState<string | null>(null);

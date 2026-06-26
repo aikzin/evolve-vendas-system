@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  BarChart3, 
-  Users, 
-  ShoppingCart, 
-  Package, 
-  Settings, 
+import {
+  BarChart3,
+  Users,
+  ShoppingCart,
+  Package,
+  Settings,
   Menu,
   X,
   TrendingUp,
   FileDown,
-  Smartphone
+  Smartphone,
+  Calendar,
+  LogOut,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
 
 const menuItems = [
   { icon: BarChart3, label: 'Dashboard', path: '/' },
   { icon: Users, label: 'Clientes', path: '/clientes' },
   { icon: ShoppingCart, label: 'Vendas', path: '/vendas' },
   { icon: Package, label: 'Estoque', path: '/estoque' },
+  { icon: Calendar, label: 'Agendamentos', path: '/agendamentos' },
   { icon: TrendingUp, label: 'Relatórios', path: '/relatorios' },
   { icon: Smartphone, label: 'WhatsApp', path: '/whatsapp' },
   { icon: FileDown, label: 'Exportar', path: '/exportar' },
@@ -29,6 +33,7 @@ const menuItems = [
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
+  const { signOut, user } = useAuth();
 
   return (
     <div className={cn(
@@ -75,11 +80,19 @@ export const Sidebar = () => {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-border">
-        <div className={cn(
-          "text-xs text-muted-foreground",
-          isCollapsed && "text-center"
-        )}>
+      <div className="p-4 border-t border-border space-y-2">
+        {user && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => signOut()}
+            className={cn("w-full justify-start gap-2 text-muted-foreground", isCollapsed && "justify-center")}
+          >
+            <LogOut className="h-4 w-4" />
+            {!isCollapsed && <span>Sair</span>}
+          </Button>
+        )}
+        <div className={cn("text-xs text-muted-foreground", isCollapsed && "text-center")}>
           {isCollapsed ? "v1.0" : "VendaCRM v1.0"}
         </div>
       </div>

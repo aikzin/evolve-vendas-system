@@ -3,7 +3,9 @@ import { FileDown, Calendar, TrendingUp, BarChart3 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useClientes } from '@/hooks/useClientes';
+import { useVendas } from '@/hooks/useVendas';
+import { useProdutos } from '@/hooks/useProdutos';
 import { Cliente, Venda, Produto } from '@/types';
 import { exportClientes, exportVendas, exportProdutos } from '@/utils/excelExport';
 import { useToast } from '@/hooks/use-toast';
@@ -25,9 +27,9 @@ import {
 const COLORS = ['hsl(var(--primary))', 'hsl(var(--accent))', 'hsl(var(--info))', 'hsl(var(--warning))', 'hsl(var(--success))'];
 
 export const Relatorios = () => {
-  const [clientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
-  const [vendas] = useLocalStorage<Venda[]>('crm_vendas', []);
-  const [produtos] = useLocalStorage<Produto[]>('crm_produtos', []);
+  const [clientes] = useClientes();
+  const [vendas] = useVendas();
+  const [produtos] = useProdutos();
   const [periodoSelecionado, setPeriodoSelecionado] = useState('30');
   const { toast } = useToast();
 

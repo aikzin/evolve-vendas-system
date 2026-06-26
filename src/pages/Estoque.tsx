@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useProdutos } from '@/hooks/useProdutos';
 import { Produto } from '@/types';
 import { exportProdutos } from '@/utils/excelExport';
 import { useToast } from '@/hooks/use-toast';
 
 export const Estoque = () => {
-  const [produtos, setProdutos] = useLocalStorage<Produto[]>('crm_produtos', []);
+  const [produtos, setProdutos] = useProdutos();
   const [searchTerm, setSearchTerm] = useState('');
   const { toast } = useToast();
 
