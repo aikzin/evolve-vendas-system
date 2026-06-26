@@ -4,13 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useClientes } from '@/hooks/useClientes';
 import { Cliente } from '@/types';
 import { exportClientes } from '@/utils/excelExport';
 import { useToast } from '@/hooks/use-toast';
 
 export const Clientes = () => {
-  const [clientes, setClientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
+  const [clientes, setClientes] = useClientes();
   const [searchTerm, setSearchTerm] = useState('');
   const { toast } = useToast();
 
