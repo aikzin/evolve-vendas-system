@@ -9,15 +9,17 @@ import {
 } from 'lucide-react';
 import { KPICard } from '@/components/dashboard/KPICard';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useClientes } from '@/hooks/useClientes';
+import { useVendas } from '@/hooks/useVendas';
+import { useProdutos } from '@/hooks/useProdutos';
 import { Cliente, Venda, Produto, KPI } from '@/types';
-import { 
-  LineChart, 
-  Line, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  LineChart,
+  Line,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   BarChart,
   Bar,
@@ -29,9 +31,9 @@ import {
 const COLORS = ['hsl(var(--primary))', 'hsl(var(--accent))', 'hsl(var(--info))', 'hsl(var(--warning))'];
 
 export const Dashboard = () => {
-  const [clientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
-  const [vendas] = useLocalStorage<Venda[]>('crm_vendas', []);
-  const [produtos] = useLocalStorage<Produto[]>('crm_produtos', []);
+  const [clientes] = useClientes();
+  const [vendas] = useVendas();
+  const [produtos] = useProdutos();
   const [kpis, setKpis] = useState<KPI>({
     vendaTotal: 0,
     vendasHoje: 0,
