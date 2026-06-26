@@ -53,7 +53,7 @@ const configuracoesIniciais: ConfiguracoesSistema = {
 };
 
 export const Configuracoes = () => {
-  const [config, setConfig] = useLocalStorage<ConfiguracoesSistema>('crm_configuracoes', configuracoesIniciais);
+  const [config, setConfig] = useConfiguracoes<ConfiguracoesSistema>(configuracoesIniciais);
   const [hasChanges, setHasChanges] = useState(false);
   const { toast } = useToast();
 
