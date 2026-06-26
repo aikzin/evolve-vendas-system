@@ -33,6 +33,7 @@ const menuItems = [
 export const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false);
   const location = useLocation();
+  const { signOut, user } = useAuth();
 
   return (
     <div className={cn(
