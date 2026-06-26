@@ -80,11 +80,19 @@ export const Sidebar = () => {
       </nav>
 
       {/* Footer */}
-      <div className="p-4 border-t border-border">
-        <div className={cn(
-          "text-xs text-muted-foreground",
-          isCollapsed && "text-center"
-        )}>
+      <div className="p-4 border-t border-border space-y-2">
+        {user && (
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => signOut()}
+            className={cn("w-full justify-start gap-2 text-muted-foreground", isCollapsed && "justify-center")}
+          >
+            <LogOut className="h-4 w-4" />
+            {!isCollapsed && <span>Sair</span>}
+          </Button>
+        )}
+        <div className={cn("text-xs text-muted-foreground", isCollapsed && "text-center")}>
           {isCollapsed ? "v1.0" : "VendaCRM v1.0"}
         </div>
       </div>
