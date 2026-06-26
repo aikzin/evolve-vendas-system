@@ -3,6 +3,8 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import { Layout } from "./components/layout/Layout";
 import { Dashboard } from "./pages/Dashboard";
 import { Clientes } from "./pages/Clientes";
@@ -12,9 +14,15 @@ import { Relatorios } from "./pages/Relatorios";
 import { ExportarDados } from "./pages/ExportarDados";
 import { Configuracoes } from "./pages/Configuracoes";
 import { ConectarWhatsApp } from "./pages/ConectarWhatsApp";
+import { Agendamentos } from "./pages/Agendamentos";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
+
+const Protected = ({ children }: { children: React.ReactNode }) => (
+  <ProtectedRoute><Layout>{children}</Layout></ProtectedRoute>
+);
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -22,19 +30,21 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Layout>
+        <AuthProvider>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/clientes" element={<Clientes />} />
-            <Route path="/vendas" element={<Vendas />} />
-            <Route path="/estoque" element={<Estoque />} />
-            <Route path="/relatorios" element={<Relatorios />} />
-            <Route path="/exportar" element={<ExportarDados />} />
-            <Route path="/configuracoes" element={<Configuracoes />} />
-            <Route path="/whatsapp" element={<ConectarWhatsApp />} />
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/" element={<Protected><Dashboard /></Protected>} />
+            <Route path="/clientes" element={<Protected><Clientes /></Protected>} />
+            <Route path="/vendas" element={<Protected><Vendas /></Protected>} />
+            <Route path="/estoque" element={<Protected><Estoque /></Protected>} />
+            <Route path="/relatorios" element={<Protected><Relatorios /></Protected>} />
+            <Route path="/exportar" element={<Protected><ExportarDados /></Protected>} />
+            <Route path="/configuracoes" element={<Protected><Configuracoes /></Protected>} />
+            <Route path="/whatsapp" element={<Protected><ConectarWhatsApp /></Protected>} />
+            <Route path="/agendamentos" element={<Protected><Agendamentos /></Protected>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </Layout>
+        </AuthProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
