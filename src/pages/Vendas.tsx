@@ -4,14 +4,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useClientes } from '@/hooks/useClientes';
+import { useVendas } from '@/hooks/useVendas';
 import { Cliente, Venda } from '@/types';
 import { exportVendas } from '@/utils/excelExport';
 import { useToast } from '@/hooks/use-toast';
 
 export const Vendas = () => {
-  const [vendas, setVendas] = useLocalStorage<Venda[]>('crm_vendas', []);
-  const [clientes, setClientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
+  const [vendas, setVendas] = useVendas();
+  const [clientes, setClientes] = useClientes();
   const [filtroStatus, setFiltroStatus] = useState<string>('todos');
   const [filtroOrigem, setFiltroOrigem] = useState<string>('todos');
   const { toast } = useToast();
