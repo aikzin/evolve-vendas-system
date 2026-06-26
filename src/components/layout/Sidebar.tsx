@@ -1,25 +1,29 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { 
-  BarChart3, 
-  Users, 
-  ShoppingCart, 
-  Package, 
-  Settings, 
+import {
+  BarChart3,
+  Users,
+  ShoppingCart,
+  Package,
+  Settings,
   Menu,
   X,
   TrendingUp,
   FileDown,
-  Smartphone
+  Smartphone,
+  Calendar,
+  LogOut,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
 
 const menuItems = [
   { icon: BarChart3, label: 'Dashboard', path: '/' },
   { icon: Users, label: 'Clientes', path: '/clientes' },
   { icon: ShoppingCart, label: 'Vendas', path: '/vendas' },
   { icon: Package, label: 'Estoque', path: '/estoque' },
+  { icon: Calendar, label: 'Agendamentos', path: '/agendamentos' },
   { icon: TrendingUp, label: 'Relatórios', path: '/relatorios' },
   { icon: Smartphone, label: 'WhatsApp', path: '/whatsapp' },
   { icon: FileDown, label: 'Exportar', path: '/exportar' },
