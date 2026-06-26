@@ -27,9 +27,9 @@ import {
 const COLORS = ['hsl(var(--primary))', 'hsl(var(--accent))', 'hsl(var(--info))', 'hsl(var(--warning))', 'hsl(var(--success))'];
 
 export const Relatorios = () => {
-  const [clientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
-  const [vendas] = useLocalStorage<Venda[]>('crm_vendas', []);
-  const [produtos] = useLocalStorage<Produto[]>('crm_produtos', []);
+  const [clientes] = useClientes();
+  const [vendas] = useVendas();
+  const [produtos] = useProdutos();
   const [periodoSelecionado, setPeriodoSelecionado] = useState('30');
   const { toast } = useToast();
 
