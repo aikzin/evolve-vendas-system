@@ -2,15 +2,17 @@ import { useState } from 'react';
 import { FileDown, Database, Users, ShoppingCart, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLocalStorage } from '@/hooks/useLocalStorage';
+import { useClientes } from '@/hooks/useClientes';
+import { useVendas } from '@/hooks/useVendas';
+import { useProdutos } from '@/hooks/useProdutos';
 import { Cliente, Venda, Produto } from '@/types';
 import { exportClientes, exportVendas, exportProdutos } from '@/utils/excelExport';
 import { useToast } from '@/hooks/use-toast';
 
 export const ExportarDados = () => {
-  const [clientes] = useLocalStorage<Cliente[]>('crm_clientes', []);
-  const [vendas] = useLocalStorage<Venda[]>('crm_vendas', []);
-  const [produtos] = useLocalStorage<Produto[]>('crm_produtos', []);
+  const [clientes] = useClientes();
+  const [vendas] = useVendas();
+  const [produtos] = useProdutos();
   const [isExporting, setIsExporting] = useState<string | null>(null);
   const { toast } = useToast();
 
