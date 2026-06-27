@@ -24,20 +24,30 @@ const Auth = () => {
     setLoading(true);
     const { error } = await supabase.auth.signInWithPassword({ email, password });
     setLoading(false);
-    if (error) toast({ title: 'Erro ao entrar', description: error.message, variant: 'destructive' });
+    if (error) {
+      const isEmailNotConfirmed = error.message.toLowerCase().includes('email not confirmed');
+      toast({
+        title: 'Erro ao entrar',
+        description: isEmailNotConfirmed
+          ? 'Este cadastro ainda está pendente de confirmação. Confirme pelo e-mail recebido ou crie uma nova conta agora.'
+          : error.message,
+        variant: 'destructive'
+      });
+    }
     else navigate('/', { replace: true });
   };
 
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    const { error } = await supabase.auth.signUp({
+    const { data, error } = await supabase.auth.signUp({
       email, password,
       options: { emailRedirectTo: `${window.location.origin}/` },
     });
     setLoading(false);
     if (error) toast({ title: 'Erro ao cadastrar', description: error.message, variant: 'destructive' });
-    else toast({ title: 'Conta criada', description: 'Você já pode entrar.' });
+    else if (data.session) toast({ title: 'Conta criada', description: 'Você já pode entrar.' });
+    else toast({ title: 'Cadastro criado', description: 'Confirme seu e-mail para liberar o acesso.' });
   };
 
   return (
