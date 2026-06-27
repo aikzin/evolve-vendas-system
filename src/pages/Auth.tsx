@@ -16,6 +16,7 @@ const Auth = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showResendConfirmation, setShowResendConfirmation] = useState(false);
 
   useEffect(() => { if (user) navigate('/', { replace: true }); }, [user, navigate]);
 
@@ -26,15 +27,37 @@ const Auth = () => {
     setLoading(false);
     if (error) {
       const isEmailNotConfirmed = error.message.toLowerCase().includes('email not confirmed');
+      setShowResendConfirmation(isEmailNotConfirmed);
       toast({
         title: 'Erro ao entrar',
         description: isEmailNotConfirmed
-          ? 'Este cadastro ainda está pendente de confirmação. Confirme pelo e-mail recebido ou crie uma nova conta agora.'
+          ? 'Este cadastro ainda está pendente de confirmação. Reenvie o e-mail de confirmação abaixo.'
           : error.message,
         variant: 'destructive'
       });
     }
-    else navigate('/', { replace: true });
+    else {
+      setShowResendConfirmation(false);
+      navigate('/', { replace: true });
+    }
+  };
+
+  const handleResendConfirmation = async () => {
+    if (!email) {
+      toast({ title: 'Informe o e-mail', description: 'Digite seu e-mail para reenviar a confirmação.', variant: 'destructive' });
+      return;
+    }
+
+    setLoading(true);
+    const { error } = await supabase.auth.resend({
+      type: 'signup',
+      email,
+      options: { emailRedirectTo: `${window.location.origin}/` },
+    });
+    setLoading(false);
+
+    if (error) toast({ title: 'Erro ao reenviar', description: error.message, variant: 'destructive' });
+    else toast({ title: 'Confirmação reenviada', description: 'Verifique sua caixa de entrada e a pasta de spam.' });
   };
 
   const handleSignup = async (e: React.FormEvent) => {
@@ -65,6 +88,11 @@ const Auth = () => {
                 <div><Label>E-mail</Label><Input type="email" value={email} onChange={e=>setEmail(e.target.value)} required /></div>
                 <div><Label>Senha</Label><Input type="password" value={password} onChange={e=>setPassword(e.target.value)} required /></div>
                 <Button type="submit" className="w-full" disabled={loading}>{loading?'Entrando...':'Entrar'}</Button>
+                {showResendConfirmation && (
+                  <Button type="button" variant="outline" className="w-full" disabled={loading} onClick={handleResendConfirmation}>
+                    Reenviar confirmação
+                  </Button>
+                )}
               </form>
             </TabsContent>
             <TabsContent value="signup">
